@@ -1,0 +1,76 @@
+config:
+  credentials: []
+  project_repos:
+    github.com/EOSC-synergy/sqaaas-tooling:
+      branch: release/1.7.11
+      repo: https://github.com/EOSC-synergy/sqaaas-tooling
+    gitlab.com/gromacs/gromacs:
+      branch: main
+      repo: https://gitlab.com/gromacs/gromacs
+environment:
+  JPL_DOCKERFORCEBUILD: enabled
+  JPL_KEEPGOING: enabled
+sqa_criteria:
+  QC.Acc:
+    repos:
+      gitlab.com/gromacs/gromacs git:
+        commands:
+        - /usr/bin/env sh .sqa/script.beady-flax-alligator.sh
+        container: qc.acc_zippy-buff-squirt
+  QC.Doc:
+    repos:
+      gitlab.com/gromacs/gromacs find_doc_files.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.lousy-fuchsia-olm.sh
+        container: qc.doc_baggy-orchid-barb
+      gitlab.com/gromacs/gromacs git:
+        commands:
+        - /usr/bin/env sh .sqa/script.hazy-dandelion-snake.sh
+        container: qc.doc_sloppy-khaki-kudu
+      gitlab.com/gromacs/gromacs markdownlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.surly-buff-woodpecker.sh
+        container: qc.doc_surly-firebrick-buzzard
+      gitlab.com/gromacs/gromacs restructuredtext-lint:
+        commands:
+        - /usr/bin/env sh .sqa/script.goopy-asparagus-nightingale.sh
+        container: qc.doc_snazzy-thistle-havanese
+  QC.Lic:
+    repos:
+      gitlab.com/gromacs/gromacs licensee:
+        commands:
+        - /usr/bin/env sh .sqa/script.hasty-lemon-horse.sh
+        container: qc.lic_tasty-black-mammoth
+  QC.Met:
+    repos:
+      gitlab.com/gromacs/gromacs cff-converter-python:
+        commands:
+        - /usr/bin/env sh .sqa/script.cheeky-silver-beaver.sh
+        container: qc.met_sloppy-tan-horse
+  QC.Sec:
+    repos:
+      gitlab.com/gromacs/gromacs bandit:
+        commands:
+        - /usr/bin/env sh .sqa/script.queasy-chocolate-antelope.sh
+        container: qc.sec_cheeky-firebrick-capuchin
+  QC.Sty:
+    repos:
+      gitlab.com/gromacs/gromacs flake8:
+        commands:
+        - /usr/bin/env sh .sqa/script.craggy-turquoise-wildebeest.sh
+        container: qc.sty_snappy-gold-chameleon
+      gitlab.com/gromacs/gromacs hadolint:
+        commands:
+        - /usr/bin/env sh .sqa/script.wimpy-orange-donkey.sh
+        container: qc.sty_scanty-chestnut-beaver
+      gitlab.com/gromacs/gromacs jsonlint:
+        commands:
+        - /usr/bin/env sh .sqa/script.skanky-ultramarine-frigatebird.sh
+        container: qc.sty_snoopy-tomato-dragonfly
+  QC.Ver:
+    repos:
+      gitlab.com/gromacs/gromacs get_git_tags.py:
+        commands:
+        - /usr/bin/env sh .sqa/script.zippy-jade-kingfisher.sh
+        container: qc.ver_cranky-sepia-dhole
+timeout: 5400
